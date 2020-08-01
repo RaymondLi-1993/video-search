@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import Input from "./components/input";
+import List from "./components/video-list";
+import Display from "./components/display";
+import useVideos from "../src/customHook/useVideos"
 
-function App() {
+
+
+
+
+
+let App = ()=>{
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, onFormSubmit] = useVideos(`Americas got talent`);
+  
+  useEffect(()=>{
+    setSelectedVideo(videos[0]);
+  },[videos]);
+  
+
+  let onVideoSelect = (video) => {
+    setSelectedVideo(video);
+  }
+
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ui container">
+      <Input onFormSubmit={onFormSubmit}/>
+      <div className = "ui grid">
+        <div className = "ui row">
+          <div className = "eleven wide column">
+            <Display selected = {selectedVideo}/> 
+          </div>
+          <div className = "five wide column">
+            <List  onVideoSelect = {onVideoSelect} videos = {videos}/>
+          </div>
+        </div>
+      </div>
     </div>
-  );
+    );
 }
+
+
 
 export default App;
