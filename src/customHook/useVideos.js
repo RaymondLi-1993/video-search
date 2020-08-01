@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import api from "../components/apis/api";
-const KEY = process.env.REACT_APP_API;
+const KEY = `AIzaSyCtC-vLF_i9MQTQZRGaXfLIlliWKGa3ycY`;
 
 let useVideos = (defaultSearch) => {
   const [videos, setVideos] =  useState([]);
